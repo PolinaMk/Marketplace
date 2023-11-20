@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from "@reduxjs/toolkit";
 import { ICard, Identifier } from "../../types";
-import { getCards, minusOneItem, plusOneItem, seeModalWindowAction, updateCardId } from "./actions";
+import { getCards, hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, updateCardId } from "./actions";
 
 export interface CardsStore {
     cards: ICard[],
@@ -55,6 +55,23 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
         store.cards.map((card) => {
             if (card.id === action.payload) {
                 return --card.quantity
+            }
+        })
+    },
+    [showQuantity.type]: (store, action: PayloadAction<Identifier>) => {
+        store.cards.map((card) => {
+            if (card.id === action.payload) {
+                card.quantityBlock = true
+            }
+        })
+    },
+    [hiddenQuantity.type]: (store, action: PayloadAction<Identifier>) => {
+        store.cards.map((card) => {
+            if (card.id === action.payload) {
+                if (card.quantity === 0) {
+                    card.quantityBlock = false
+                    card.quantity = 1
+                }
             }
         })
     }

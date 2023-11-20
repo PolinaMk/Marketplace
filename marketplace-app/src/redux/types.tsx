@@ -8,4 +8,5 @@ export interface ICard {
     price: number | string,
     quantity: number,
     img: string,
+    quantityBlock: boolean
 }

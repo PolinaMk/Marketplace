@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ICard, Identifier } from "../redux/types";
 import { AppStore } from "../redux/store";
-import { plusOneItem, seeModalWindowAction, updateCardId } from "../redux/pages/cards/actions";
+import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, updateCardId } from "../redux/pages/cards/actions";
 import { useEffect, useMemo } from "react";
 import _ from "lodash"
 
@@ -19,12 +19,21 @@ export const Card: React.FC<CardProps> = ({ card }) => {
         dispatch(updateCardId(card))
     }
 
-    const plusOne = (id: Identifier) => {
+    const showQuantityBlock = () => {
+      dispatch(showQuantity(card.id))
+    }
+
+    const hiddenQuantityBlock = () => {
+      dispatch(hiddenQuantity(card.id))
+    }
+
+    const plusOne = () => {
         dispatch(plusOneItem(card.id))
     }
 
-    const minusOne = (id: Identifier) => {
-        dispatch(plusOneItem(card.id))
+    const minusOne = () => {
+      dispatch(minusOneItem(card.id))
+      hiddenQuantityBlock()
     }
 
     const minusItemCheck = useMemo(() => {
@@ -32,7 +41,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
     }, [card])
 
     const plusItemCheck = useMemo(() => {
-        return _.isEqual(card.quantity, 100)
+        return _.isEqual(card.quantity, 10)
     }, [card])
 
     return <div className="card">
@@ -52,12 +61,12 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           </div>
           <div className="card__bottom">
             <h2 className="card__bottom_price">{card.price}$</h2>
-            <div className="card__bottom_quantity-wrapper">
-                <button type="button" className="btn btn-primary card__btn-quantity card__btn-quantity-minus" onClick={() => minusOne(card.id)} disabled={minusItemCheck}>-</button>
+            {card.quantityBlock && <div className="card__bottom_quantity-wrapper">
+                <button type="button" className="btn btn-primary card__btn-quantity card__btn-quantity-minus" onClick={() => minusOne()} disabled={minusItemCheck}>-</button>
                 <p className="card__bottom_quantity">{card.quantity}</p>
-                <button type="button" className="btn btn-primary card__btn-quantity card__btn-quantity-plus" onClick={() => plusOne(card.id)} disabled={plusItemCheck}>+</button>
-            </div>
-            <button className="card__bottom_btn">Add to cart</button>
+                <button type="button" className="btn btn-primary card__btn-quantity card__btn-quantity-plus" onClick={() => plusOne()} disabled={plusItemCheck}>+</button>
+            </div>}
+            {!card.quantityBlock && <button className="card__bottom_btn" onClick={() => showQuantityBlock()}>Add to cart</button>}
           </div>
         </div>
 }

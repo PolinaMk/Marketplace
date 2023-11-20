@@ -20,6 +20,7 @@ export const mockItems = [
         price: 10,
         quantity: 1,
         img: Card1,
+        quantityBlock: false,
     },
     {
         id: 2,
@@ -28,6 +29,7 @@ export const mockItems = [
         price: 20,
         quantity: 1,
         img: Card2,
+        quantityBlock: false,
     },
     {
         id: 3,
@@ -36,6 +38,7 @@ export const mockItems = [
         price: 15,
         quantity: 1,
         img: Card3,
+        quantityBlock: false,
     },
     {
         id: 4,
@@ -44,6 +47,7 @@ export const mockItems = [
         price: 90,
         quantity: 1,
         img: Card4,
+        quantityBlock: false,
     },
     {
         id: 5,
@@ -52,6 +56,7 @@ export const mockItems = [
         price: 9,
         quantity: 1,
         img: Card5,
+        quantityBlock: false,
     },
     {
         id: 6,
@@ -60,6 +65,7 @@ export const mockItems = [
         price: 19,
         quantity: 1,
         img: Card6,
+        quantityBlock: false,
     },
     {
         id: 7,
@@ -68,6 +74,7 @@ export const mockItems = [
         price: 60,
         quantity: 1,
         img: Card7,
+        quantityBlock: false,
     },
     {
         id: 8,
@@ -76,6 +83,7 @@ export const mockItems = [
         price: 80,
         quantity: 1,
         img: Card8,
+        quantityBlock: false,
     },
     {
         id: 9,
@@ -84,6 +92,7 @@ export const mockItems = [
         price: 70,
         quantity: 1,
         img: Card9,
+        quantityBlock: false,
     },
     {
         id: 10,
@@ -92,6 +101,7 @@ export const mockItems = [
         price: 5,
         quantity: 1,
         img: Card10,
+        quantityBlock: false,
     },
     {
         id: 11,
@@ -100,6 +110,7 @@ export const mockItems = [
         price: 88,
         quantity: 1,
         img: Card11,
+        quantityBlock: false,
     },
     {
         id: 12,
@@ -108,6 +119,7 @@ export const mockItems = [
         price: 10,
         quantity: 1,
         img: Card12,
+        quantityBlock: false,
     },
     {
         id: 13,
@@ -116,6 +128,7 @@ export const mockItems = [
         price: 7,
         quantity: 1,
         img: Card13,
+        quantityBlock: false,
     },
 ]
 
