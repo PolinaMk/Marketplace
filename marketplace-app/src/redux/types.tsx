@@ -5,8 +5,15 @@ export interface ICard {
     id: Identifier,
     title: string,
     body: string,
-    price: number | string,
+    price: number,
     quantity: number,
     img: string,
     quantityBlock: boolean
+}
+
+export interface ICart {
+    id: Identifier,
+    title: string,
+    price: number,
+    quantity: number,
 }

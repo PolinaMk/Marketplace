@@ -11,7 +11,7 @@ export const ModalCard: React.FC = () => {
     }
 
 
-    if (modal === false) {
+    if (!modal) {
         return null
     } else {
         return <div className="modal-card">

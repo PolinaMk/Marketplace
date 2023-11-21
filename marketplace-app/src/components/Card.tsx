@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ICard, Identifier } from "../redux/types";
 import { AppStore } from "../redux/store";
-import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, updateCardId } from "../redux/pages/cards/actions";
+import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, totalMinusSum, totalSum, updateCardId } from "../redux/pages/cards/actions";
 import { useEffect, useMemo } from "react";
 import _ from "lodash"
+import { addToCart } from "../redux/pages/cart/actions";
 
 
 interface CardProps {
@@ -11,16 +12,18 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ card }) => {
-    const { cardId } = useSelector((store: AppStore) => store.pages.cards)
-    const dispatch = useDispatch()
+  const { cardId } = useSelector((store: AppStore) => store.pages.cards)
+  const { cart } = useSelector((store: AppStore) => store.pages.cart)
+  const dispatch = useDispatch()
 
     const changeModal = (modal: boolean) => {
-        dispatch(seeModalWindowAction(modal))
-        dispatch(updateCardId(card))
+      dispatch(seeModalWindowAction(modal))
+      dispatch(updateCardId(card))
     }
 
     const showQuantityBlock = () => {
       dispatch(showQuantity(card.id))
+      dispatch(totalSum(card.price))
     }
 
     const hiddenQuantityBlock = () => {
@@ -28,21 +31,24 @@ export const Card: React.FC<CardProps> = ({ card }) => {
     }
 
     const plusOne = () => {
-        dispatch(plusOneItem(card.id))
+      dispatch(plusOneItem(card.id))
+      dispatch(totalSum(card.price))
     }
 
     const minusOne = () => {
       dispatch(minusOneItem(card.id))
       hiddenQuantityBlock()
+      dispatch(totalMinusSum(card.price))
     }
 
     const minusItemCheck = useMemo(() => {
-        return _.isEqual(card.quantity, 0)
+      return _.isEqual(card.quantity, 0)
     }, [card])
 
     const plusItemCheck = useMemo(() => {
-        return _.isEqual(card.quantity, 10)
+      return _.isEqual(card.quantity, 10)
     }, [card])
+
 
     return <div className="card">
           <div className="card__top">
