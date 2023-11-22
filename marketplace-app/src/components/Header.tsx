@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { seeModalCart } from "../redux/pages/cart/actions"
-import { searchCards } from "../redux/pages/cards/actions"
-import { useEffect, useMemo, useState } from "react"
+import { getCards, searchCards, showPromo } from "../redux/pages/cards/actions"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { AppStore } from "../redux/store"
+import { debounce } from "lodash"
 
 export const Header: React.FC = () => {
   const { cards } = useSelector((store: AppStore) => store.pages.cards)
@@ -14,10 +15,30 @@ export const Header: React.FC = () => {
       dispatch(seeModalCart(modal))
   }
 
+  const showPromoSwiper = () => {
+    dispatch(showPromo(false))
+  }
+
+  const hiddenPromoSwiper = () => {
+    dispatch(showPromo(true))
+  }
+
+  const getPosts = useCallback(debounce(async (value) => {
+    dispatch(searchCards(value))
+  }, 450), [searchValue])
+
+  useEffect(() => {
+    getPosts(searchValue)
+    hiddenPromoSwiper()
+  }, [searchValue])
+
+  if (searchValue) {
+    showPromoSwiper()
+  }
 
   return <header className="header">
     <div className="container header__container">
-      <a className="header__logo" href="#">NFT Marketplace</a>
+      <a className="header__logo" href="#" >NFT Marketplace</a>
       <div className="header__form">
         <div className="header__button_search">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -5,9 +5,14 @@ import Promo4 from '../assets/images/swiper_img_4.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
+import { useSelector } from 'react-redux';
+import { AppStore } from '../redux/store';
 //import 'swiper/css/pagination';
 
 export const Promo: React.FC = () => {
+  const { promoShow } = useSelector((store: AppStore) => store.pages.cards)
+
+  if (promoShow) {
     return <Swiper className="swiper mySwiper" pagination={{ clickable: true }} modules={[Pagination]}>
       <div className="slider__text">
         <p className="slider__title">Welcome to</p>
@@ -36,5 +41,8 @@ export const Promo: React.FC = () => {
         </SwiperSlide>
       </div>
       <div className="swiper-pagination swiper-pagination-bullet"></div>
-    </Swiper>
+    </Swiper >
+  } else {
+    return null
+  }
 }

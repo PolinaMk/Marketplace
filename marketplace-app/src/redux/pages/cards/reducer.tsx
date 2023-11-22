@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from "@reduxjs/toolkit";
 import { ICard, Identifier } from "../../types";
-import { deleteAllItemsInCart, deleteCard, getCards, hiddenQuantity, minusOneItem, plusOneItem, searchCards, seeModalWindowAction, showQuantity, totalMinusSum, totalSum, updateCardId } from "./actions";
+import { deleteAllItemsInCart, deleteCard, getCards, hiddenQuantity, minusOneItem, plusOneItem, searchCards, seeModalWindowAction, showPromo, showQuantity, totalMinusSum, totalSum, updateCardId } from "./actions";
 
 export interface CardsStore {
     cards: ICard[],
@@ -10,6 +10,8 @@ export interface CardsStore {
     cardModal: ICard | null,
     cardId: Identifier | null,
     totalSum: number,
+    promoShow: boolean,
+    filteredCards: ICard[] | []
 }
 
 type AsyncAction<T = any, M = any> = {
@@ -25,7 +27,9 @@ const defaultMiniStore: CardsStore = {
     modal: false,
     cardModal: null,
     cardId: null,
-    totalSum: 0
+    totalSum: 0,
+    promoShow: true,
+    filteredCards: []
 }
 
 export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
@@ -99,6 +103,9 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
         })
     },
     [searchCards.type]: (store, action: PayloadAction<string>) => {
-        store.cards.filter(card => card.title.toLowerCase().includes(action.payload.toLowerCase()))
+        store.filteredCards = store.cards.filter(card => card.title.toLowerCase().includes(action.payload.toLowerCase()))
+    },
+    [showPromo.type]: (store, action: PayloadAction<boolean>) => {
+        store.promoShow = action.payload
     }
 })

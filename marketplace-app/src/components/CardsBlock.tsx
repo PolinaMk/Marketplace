@@ -5,7 +5,7 @@ import { getCards } from "../redux/pages/cards/actions"
 import { Card } from "./Card"
 
 export const CardsBlock: React.FC = () => {
-    const { cards, loading } = useSelector((store: AppStore) => store.pages.cards)
+    const { cards, loading, filteredCards } = useSelector((store: AppStore) => store.pages.cards)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,7 +24,10 @@ export const CardsBlock: React.FC = () => {
 
     return <div className="cards" id="cardsAll">
         <div className="container container__cards" id="cardsTotal">
-            {cards.map((card) => {
+            {filteredCards.length === 0 && cards.map((card) => {
+                return <Card key={card.id} card={card}></Card>
+            })}
+            {filteredCards.length > 0 && filteredCards.map((card) => {
                 return <Card key={card.id} card={card}></Card>
             })}
       </div>

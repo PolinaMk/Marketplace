@@ -4,7 +4,6 @@ import { AppStore } from "../redux/store";
 import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, totalMinusSum, totalSum, updateCardId } from "../redux/pages/cards/actions";
 import { useEffect, useMemo } from "react";
 import _ from "lodash"
-import { addToCart } from "../redux/pages/cart/actions";
 
 
 interface CardProps {
@@ -13,7 +12,6 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ card }) => {
   const { cardId } = useSelector((store: AppStore) => store.pages.cards)
-  const { cart } = useSelector((store: AppStore) => store.pages.cart)
   const dispatch = useDispatch()
 
     const changeModal = (modal: boolean) => {
