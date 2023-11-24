@@ -56,6 +56,11 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
                 return ++card.quantity
             }
         })
+        store.filteredCards.map((card) => {
+            if (card.id === action.payload) {
+                return ++card.quantity
+            }
+        })
     },
     [minusOneItem.type]: (store, action: PayloadAction<Identifier>) => {
         store.cards.map((card) => {
@@ -63,9 +68,19 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
                 return --card.quantity
             }
         })
+        store.filteredCards.map((card) => {
+            if (card.id === action.payload) {
+                return --card.quantity
+            }
+        })
     },
     [showQuantity.type]: (store, action: PayloadAction<Identifier>) => {
         store.cards.map((card) => {
+            if (card.id === action.payload) {
+                card.quantityBlock = true
+            }
+        })
+        store.filteredCards.map((card) => {
             if (card.id === action.payload) {
                 card.quantityBlock = true
             }
@@ -80,9 +95,23 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
                 }
             }
         })
+        store.filteredCards.map((card) => {
+            if (card.id === action.payload) {
+                if (card.quantity === 0) {
+                    card.quantityBlock = false
+                    card.quantity = 1
+                }
+            }
+        })
     },
     [deleteCard.type]: (store, action: PayloadAction<Identifier>) => {
         store.cards.map((card) => {
+            if (card.id === action.payload) {
+                card.quantityBlock = false
+                card.quantity = 1
+            }
+        })
+        store.filteredCards.map((card) => {
             if (card.id === action.payload) {
                 card.quantityBlock = false
                 card.quantity = 1

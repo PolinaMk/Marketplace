@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { seeModalCart } from "../redux/pages/cart/actions"
-import { getCards, searchCards, showPromo } from "../redux/pages/cards/actions"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { searchCards, showPromo } from "../redux/pages/cards/actions"
+import { useCallback, useEffect, useState } from "react"
 import { AppStore } from "../redux/store"
 import { debounce } from "lodash"
 

@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { ICard, Identifier } from "../redux/types";
-import { AppStore } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { ICard } from "../redux/types";
 import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, totalMinusSum, totalSum, updateCardId } from "../redux/pages/cards/actions";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import _ from "lodash"
 
 
@@ -11,7 +10,6 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ card }) => {
-  const { cardId } = useSelector((store: AppStore) => store.pages.cards)
   const dispatch = useDispatch()
 
     const changeModal = (modal: boolean) => {

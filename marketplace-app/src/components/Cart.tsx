@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { seeModalCart } from "../redux/pages/cart/actions"
 import { AppStore } from "../redux/store"
 import { ItemCart } from "./ItemCart"
-import { useEffect } from "react"
 import { deleteAllItemsInCart } from "../redux/pages/cards/actions"
 
 export const Cart: React.FC = () => {
