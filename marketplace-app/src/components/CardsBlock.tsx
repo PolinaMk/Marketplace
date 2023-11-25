@@ -24,7 +24,10 @@ export const CardsBlock: React.FC = () => {
 
     return <div className="cards" id="cardsAll">
         <div className="container container__cards" id="cardsTotal">
-            {filteredCards.length === filteredCards.length && filteredCards.map((card) => {
+            {filteredCards.length > 0 && filteredCards.map((card) => {
+                return <Card key={card.id} card={card}></Card>
+            })}
+            {filteredCards.length === cards.length && cards.map((card) => {
                 return <Card key={card.id} card={card}></Card>
             })}
             {filteredCards.length === 0 && cards.map((card) => {

@@ -23,12 +23,12 @@ export const Header: React.FC = () => {
     dispatch(showPromo(true))
   }
 
-  const getPosts = useCallback(debounce(async (value) => {
+  const getFilteredCards = useCallback(debounce(async (value) => {
     dispatch(searchCards(value))
   }, 450), [searchValue])
 
   useEffect(() => {
-    getPosts(searchValue)
+    getFilteredCards(searchValue)
     hiddenPromoSwiper()
   }, [searchValue])
 
