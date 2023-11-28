@@ -11,7 +11,7 @@ export interface CardsStore {
     cardId: Identifier | null,
     totalSum: number,
     promoShow: boolean,
-    filteredCards: ICard[] | []
+    filteredCards: ICard[] | [],
 }
 
 type AsyncAction<T = any, M = any> = {
@@ -29,7 +29,7 @@ const defaultMiniStore: CardsStore = {
     cardId: null,
     totalSum: 0,
     promoShow: true,
-    filteredCards: []
+    filteredCards: [],
 }
 
 export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
@@ -136,5 +136,5 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
     },
     [showPromo.type]: (store, action: PayloadAction<boolean>) => {
         store.promoShow = action.payload
-    }
+    },
 })
