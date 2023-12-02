@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import PolinaPhoto from '../assets/images/about_us/polina.jpeg';
-import { AppStore } from '../redux/store';
-import { getGreeting, getTime } from '../redux/pages/contacts/actions';
+import { useState } from 'react';
 
 const contactMessage = () => {
     const result = window.confirm(`Do you want to contact with Polina?`);
@@ -12,25 +10,33 @@ const contactMessage = () => {
     }
 }
 
+const date = new Date();
+const hours = date.getHours();
+const getTimeOfDay = () => {
+    if (hours >= (6) && hours < (12)) {
+        return 'morning';
+    } else if (hours >= (12) && hours < (18)) {
+        return 'afternoon';
+    } else if (hours >= (18) && hours < (24)) {
+        return 'evening';
+    } else if (hours >= (24) && hours < (6)){
+        return 'night';
+    }
+}
+const timeOfDay = getTimeOfDay();
+
 export const ContactsPage: React.FC = () => {
-    const { time, greetingText } = useSelector((store: AppStore) => store.pages.contacts)
-    const dispatch = useDispatch()
+    const [time, setTime] = useState('')
+    const [greeting, setGreeting] = useState('')
 
-    function showTime() {
-        dispatch(getTime())
-        setTimeout(showTime, 1000);
-    }
-    showTime();
-
-    function showGreeting() {
-        dispatch(getGreeting())
-        setTimeout(showGreeting, 1000);
-    }
-    showGreeting();
+    setTimeout(() => {
+        setTime(new Date().toLocaleTimeString());
+        setGreeting(`Good ${timeOfDay}!`)
+    }, 1000);
 
     return <div className="about_us" id="about_us">
         <div className="container">
-            <p className='greeting__text'>{greetingText}</p>
+            <p className='greeting__text'>{greeting}</p>
         <div className='time__block'>
             <p className='time__text'>Current time:</p>
             <time className="time">{time}</time>

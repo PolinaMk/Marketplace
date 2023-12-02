@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { ICard } from "../redux/types";
-import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, totalMinusSum, totalSum, updateCardId } from "../redux/pages/cards/actions";
+import { hiddenQuantity, minusOneItem, plusOneItem, seeModalWindowAction, showQuantity, totalSum, updateCardId } from "../redux/pages/cards/actions";
 import { useMemo } from "react";
 import _ from "lodash"
 
@@ -19,7 +19,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
 
     const showQuantityBlock = () => {
       dispatch(showQuantity(card.id))
-      dispatch(totalSum(card.price))
+      dispatch(totalSum())
     }
 
     const hiddenQuantityBlock = () => {
@@ -28,13 +28,13 @@ export const Card: React.FC<CardProps> = ({ card }) => {
 
     const plusOne = () => {
       dispatch(plusOneItem(card.id))
-      dispatch(totalSum(card.price))
+      dispatch(totalSum())
     }
 
     const minusOne = () => {
       dispatch(minusOneItem(card.id))
       hiddenQuantityBlock()
-      dispatch(totalMinusSum(card.price))
+      dispatch(totalSum())
     }
 
     const minusItemCheck = useMemo(() => {

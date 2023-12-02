@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from "@reduxjs/toolkit";
 import { ICard, Identifier } from "../../types";
-import { deleteAllItemsInCart, deleteCard, getCards, hiddenQuantity, minusOneItem, plusOneItem, searchCards, seeModalWindowAction, showPromo, showQuantity, totalMinusSum, totalSum, updateCardId } from "./actions";
+import { deleteAllItemsInCart, deleteCard, getCards, hiddenQuantity, minusOneItem, plusOneItem, searchCards, seeModalWindowAction, showPromo, showQuantity, totalSum, updateCardId } from "./actions";
 
 export interface CardsStore {
     cards: ICard[],
@@ -105,24 +105,21 @@ export const cardsReducer = createReducer<CardsStore>(defaultMiniStore, {
         })
     },
     [deleteCard.type]: (store, action: PayloadAction<Identifier>) => {
-        store.cards.map((card) => {
+        store.cards.forEach((card) => {
             if (card.id === action.payload) {
                 card.quantityBlock = false
                 card.quantity = 1
             }
         })
-        store.filteredCards.map((card) => {
+        store.filteredCards.forEach((card) => {
             if (card.id === action.payload) {
                 card.quantityBlock = false
                 card.quantity = 1
             }
         })
     },
-    [totalSum.type]: (store, action: PayloadAction<number>) => {
-        store.totalSum = store.totalSum + action.payload
-    },
-    [totalMinusSum.type]: (store, action: PayloadAction<number>) => {
-        store.totalSum = store.totalSum - action.payload
+    [totalSum.type]: (store) => {
+        store.totalSum = store.cards.filter(card => card.quantityBlock).reduce((sum, card) => sum + card.price * card.quantity, 0)
     },
     [deleteAllItemsInCart.type]: (store) => {
         store.totalSum = 0

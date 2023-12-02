@@ -1,7 +1,7 @@
 import { ICard } from "../redux/types"
 import deleteBtn from '../assets/images/svg/delete.svg';
 import { useDispatch } from "react-redux";
-import { deleteCard, hiddenQuantity, minusOneItem, plusOneItem, totalMinusSum, totalSum } from "../redux/pages/cards/actions";
+import { deleteCard, hiddenQuantity, minusOneItem, plusOneItem, totalSum } from "../redux/pages/cards/actions";
 import { useMemo } from "react";
 import _ from "lodash";
 
@@ -14,13 +14,13 @@ export const ItemCart: React.FC<CartItemProps> = ({ card }) => {
 
     const plusOne = () => {
         dispatch(plusOneItem(card.id))
-        dispatch(totalSum(card.price))
+        dispatch(totalSum())
     }
 
     const minusOne = () => {
         dispatch(minusOneItem(card.id))
         hiddenQuantity()
-        dispatch(totalMinusSum(card.price))
+        dispatch(totalSum())
     }
 
     const minusItemCheck = useMemo(() => {
@@ -33,7 +33,7 @@ export const ItemCart: React.FC<CartItemProps> = ({ card }) => {
 
     const deleteItem = () => {
         dispatch(deleteCard(card.id))
-        dispatch(totalMinusSum(card.price * card.quantity))
+        dispatch(totalSum())
     }
 
     if (card.quantity === 0) {

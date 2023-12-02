@@ -11,8 +11,8 @@ export const Header: React.FC = () => {
   const dispatch = useDispatch()
   const [searchValue, setSearchValue] = useState('')
 
-  const openCart = (modal: boolean) => {
-      dispatch(seeModalCart(modal))
+  const openCart = () => {
+      dispatch(seeModalCart(true))
   }
 
   const showPromoSwiper = () => {
@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
 
   const getFilteredCards = useCallback(debounce(async (value) => {
     dispatch(searchCards(value))
-  }, 450), [searchValue])
+  }, 450), [])
 
   useEffect(() => {
     getFilteredCards(searchValue)
@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
       </div>
       <NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/'>Main</NavLink>
       <NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/contacts'>Contacts</NavLink>
-      <button className="header__button_cart" onClick={() => openCart(true)}>Cart</button>
+      <button className="header__button_cart" onClick={openCart}>Cart</button>
     </div>
   </header>
 }

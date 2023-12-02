@@ -517,7 +517,7 @@ html {
     background: #FFF;
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);
     padding: 41px 40px;
-    position: absolute;
+    position: fixed;
   }
 
   &__footer-sumWrapper {
@@ -615,7 +615,6 @@ html {
     font-family: Roboto;
     font-size: 32px;
     font-style: normal;
-    font-weight: 500;
     line-height: normal;
     line-height: 38px;
     text-align: end;
@@ -645,7 +644,7 @@ html {
     border-radius: 14px;
     background: #FFF;
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
-    padding: 24px 44px 20px;
+    padding: 24px 44px 35px;
     position: fixed;
   }
 
